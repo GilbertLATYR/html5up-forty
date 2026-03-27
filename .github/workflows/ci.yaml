@@ -13,7 +13,7 @@ env:
 jobs:
 
   # ===============================
-  # JOB 1 - CI : BUILD + PUSH + SCAN
+  # JOB 1 - CI : BUILD + PUSH
   # ===============================
   ci:
     runs-on: ubuntu-latest
@@ -50,13 +50,9 @@ jobs:
   # ===============================
   deploy:
     needs: ci
-    runs-on: runner-lab
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Pull latest image
-        run: |
-          echo "Hello deploy"
-
       - name: Pull latest image
         run: |
           docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
